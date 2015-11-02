@@ -1,6 +1,6 @@
 //String prototype tests for vowels in strings
 String.prototype.hasVowels = function() {
-    return (/[aeiou]/ig).test(this);
+  return (/[aeiou]/ig).test(this);
 };
 
 // String prototype converts lowercases into uppercase using ascii values
@@ -62,7 +62,7 @@ String.prototype.toCurrency = function() {
   var intval = values[1]; // integer value
   var deciPointval = values[2]; // decimal point values
   var div_digits = '',
-    currencyval  = deciPointval;
+    currencyval = deciPointval;
 
   while (intval !== '') {
     div_digits = intval.match(/(\d{0,3})$/)[1]; // gets last zero to three digits in integer 
@@ -75,11 +75,10 @@ String.prototype.toCurrency = function() {
   }
   // return appended digits
   return currencyval;
-
 };
 
 // String prototype to return Number from currency string
 String.prototype.fromCurrency = function() {
-  if(!(/\d/).test(this)) return "String is not a currency value";
+  if (!(/\d/).test(this)) return "String is not a currency value";
   return parseFloat(this.replace(/,/g, ''));
 };

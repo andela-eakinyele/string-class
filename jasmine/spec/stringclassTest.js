@@ -8,7 +8,7 @@ describe("Extends the String  Class", function() {
   });
   
   it("Tests for vowels in a string", function() {
-    expect(testString1.hasVowels()).toBeTruthy();
+    expect((testString1).hasVowels()).toBeTruthy();
     expect(testString2.hasVowels()).toBeFalsy();
   });
   it("Converts string characters to Uppercase", function() {
