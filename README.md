@@ -48,7 +48,7 @@ e.g ("String class extended?").isQuestion() equals `true`
 
 ### <a name = "wd"></a>words
 ```
-Returns an array of words in the string  (words are assumed to be separated by spaces)
+Returns an array of words in the string  (words are assumed to only consist of alphabets, apostrophe and hyphen)
 e.g ('String class extended').words() equals `["String", "class", "extended"]`
 ```
 
