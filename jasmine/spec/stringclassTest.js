@@ -34,6 +34,7 @@ describe("Extends the String  Class", function() {
   });
 
   it("Returns an array of words in a string", function() {
+    expect(teststr2.words().length).not.toEqual(undefined);
     expect(teststr2.words()).toEqual(["Rhythm'", "P-Synch's", 'Pygmy', 'Gypsy', 'ww', 'cm']);
   });
 
@@ -42,12 +43,14 @@ describe("Extends the String  Class", function() {
   });
 
   it("Returns currency represenatation of a string", function() {
+    expect(typeof testtoCurr.toCurrency()).toEqual('string');
     expect(testtoCurr.toCurrency()).toEqual("76,549,876.78");
     expect(testtoCurr1.toCurrency()).toEqual("String is not a valid number");
     expect(testtoCurr2.toCurrency()).toEqual("-78,998.00");
   });
 
    it("Returns numeric value of currency represenatation", function() {
+    expect(typeof testfromCurr.fromCurrency()).toEqual('number');
     expect(testfromCurr.fromCurrency()).toEqual(45987098.34);
     expect(testfromCurr1.fromCurrency()).toEqual("String is not a valid currency");
     expect(testfromCurr2.fromCurrency()).toEqual(-1345879.00);
