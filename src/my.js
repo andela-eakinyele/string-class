@@ -46,26 +46,16 @@ String.prototype.wordCount = function() {
 
 // String prototype converts string to currency format
 String.prototype.toCurrency = function() {
-  // gets integer and floating point values
-  var values = (/^(-{0,1})(\d*)(?:\.)?((\d*)$)/).exec(this);
-  if (values === null) return "String is not a valid number";
-  var sign = values[1];
-  var intval = values[2]; // integer value
-  var deci = (values[3].length === 1)? values[3] +'0' : values[3]; // decimal point values
-  var div_digits = '';
-
-  var currencyval = (deci === '') ? '' : '.' + deci.match(/(\d{1,2})/)[1];
-  while (intval !== '') {
-    div_digits = intval.match(/(\d{0,3})$/)[1]; // gets last zero to three digits in integer 
-    intval = intval.replace(/(\d{0,3})$/, ''); // replaces last zero to three digits
-    if (intval === '') {
-      currencyval = div_digits + currencyval; //appends last div-digts without a comma
-    } else {
-      currencyval = ',' + div_digits + currencyval; //appends div_digits with comma separator
-    }
+  var str = this;
+  if(!(/^(-{0,1})(\d*)(?:\.)?((\d*)$)/).test(str)) return  "String is not a valid number";
+ // values = str.match(/^(-{0,1}\d*)(\d{3}[\d{3},]*\d{3}|\d{3})(\.?\d{0,2})/);
+ // console.log(values);
+  while(!(/^-{0,1}\d{1,3}(,\d{3})*(,\d{3}$|\.?\d{1,2}?$)/).test(str)){
+    str = str.replace(/^(-{0,1}\d*)(\d{3}[\d{3},]*\d{3}|\d{3})(\.?\d{0,2})/, "$1" + "," + "$2" + "$3");
   }
-  // return appended digits
-  return sign + currencyval;
+ // // //  if(str.match(/\.(\d*)/)[1]) {
+ // // // console.log(str.match(/\.(\d*)/)[1]);}
+  return str;
 };
 
 // String prototype to return Number from currency string
@@ -74,4 +64,4 @@ String.prototype.fromCurrency = function() {
   return parseFloat(this.replace(/,/g, ''));
 };
 // console.log(("-12333239889884444.9").match(/^(-{0,1}\d*)(\d{3}(?=,)|\d{3}$|\d{3})((\.)?\d{0,2})\d*/)[3].length);
-console.log(("1233367239889884444.9").toCurrency());
+console.log(("123336723988884444.").toCurrency());
