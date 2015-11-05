@@ -5,32 +5,18 @@ String.prototype.hasVowels = function() {
 
 // String prototype converts lowercases into uppercase using ascii values
 String.prototype.toUpper = function() {
-  // defines variables for lowercase and uppercase lettters
-  var newstr = this,
-    alpha_lower = '',
-    alpha_upper = '';
   // gets each lowercase letter and replace with uppercase letters
-  while (alpha_lower !== null) {
-    alpha_lower = (/([a-z])/).exec(newstr); // regex to get lowercase letter
-    if (alpha_lower === null) return newstr; // returns string if lowercase letters does not exist
-    alpha_upper = String.fromCharCode(alpha_lower[1].charCodeAt(0) - 32); // gets uppercase equivalent using ascii code
-    newstr = newstr.replace(alpha_lower[1], alpha_upper); // replaces  lowercase with uppercase
-  }
+  return this.replace( /[a-z]/g, function(x) {
+    return String.fromCharCode(x.charCodeAt(0) - 32);
+  });
 };
 
 // String protottype converts lowercases into uppercase using ascii values
 String.prototype.toLower = function() {
-  // define variables for lowercase and uppercase lettters
-  var newstr = this,
-    alpha_lower = '',
-    alpha_upper = '';
-
-  while (alpha_upper !== null) {
-    alpha_upper = (/([A-Z])/).exec(newstr); // regex to get uppercase letter
-    if (alpha_upper === null) return newstr; // return string if lowercase letters does not exist
-    alpha_lower = String.fromCharCode(alpha_upper[1].charCodeAt(0) + 32); // gets lowercase equivalent using ascii code
-    newstr = newstr.replace(alpha_upper[1], alpha_lower); // replaces  uppercase with lowercase
-  }
+  // gets each lowercase letter and replace with uppercase letters
+  return this.replace(/[A-Z]/g, function(x) {
+    return String.fromCharCode(x.charCodeAt(0) + 32);
+  });
 };
 
 // String prototype converts first letter to uppercase
@@ -46,9 +32,8 @@ String.prototype.isQuestion = function() {
 
 // String prototype returns array of words in a string
 String.prototype.words = function() {
-  var wrds = this.trim();
   // split by non word characters
-  wrds = wrds.split(/[^a-z|'-]+/ig);
+  wrds = this.trim().split(/[^a-z|'-]+/ig);
   return wrds.filter(function(x) {
     return x !== '';
   });
@@ -61,7 +46,6 @@ String.prototype.wordCount = function() {
 
 // String prototype converts string to currency format
 String.prototype.toCurrency = function() {
-
   // gets integer and floating point values
   var values = (/^(-{0,1})(\d*)(?:\.)?((\d*)$)/).exec(this);
   if (values === null) return "String is not a valid number";
@@ -84,8 +68,10 @@ String.prototype.toCurrency = function() {
   return sign + currencyval;
 };
 
-// // String prototype to return Number from currency string
+// String prototype to return Number from currency string
 String.prototype.fromCurrency = function() {
-  if(!(/^-{0,1}\d{1,3}((?:,\d{3})*(?:\.\d{1,2})?)$/).test(this)) return "String is not a valid currency";
+  if (!(/^-{0,1}\d{1,3}((?:,\d{3})*(?:\.\d{1,2})?)$/).test(this)) return "String is not a valid currency";
   return parseFloat(this.replace(/,/g, ''));
 };
+// console.log(("-12333239889884444.9").match(/^(-{0,1}\d*)(\d{3}(?=,)|\d{3}$|\d{3})((\.)?\d{0,2})\d*/)[3].length);
+console.log(("1233367239889884444.9").toCurrency());
